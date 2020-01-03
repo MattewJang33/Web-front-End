@@ -1,0 +1,13 @@
+import time
+import urllib.request
+from bs4 import BeautifulSoup
+
+while True:
+
+    quote_page = "https://www.naver.com"
+    page = urllib.request.urlopen(quote_page)
+    soup = BeautifulSoup(page, 'html.parser')
+    for i in soup.find_all("span", {"class": "ah_k"})[:10]:
+        print(i.text)
+        time.sleep(1)
+
