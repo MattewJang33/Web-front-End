@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Playing drum!</title>
+
+
+  </head>
+<style>
+  body  {
+
+    background-image: url('drum_playing_guy.jpg');
+    background-size: cover;
+    }
+
+
+    #a {
+      background-color: rgb(100,100,50,0.5);
+      border: 3px solid black;
+    }
+    #s {
+      background-color: rgb(100,100,50,0.5);
+      border: 3px solid black;
+    }
+    #d {
+      background-color: rgb(100,100,50,0.5);
+      border: 3px solid black;
+    }
+    #f {
+      background-color: rgb(100,100,50,0.5);
+    border: 3px solid black;
+    }
+    #h {
+      background-color: rgb(100,100,50,0.5);
+    border: 3px solid black;
+    }
+    #j {
+      background-color: rgb(100,100,50,0.5);
+      border: 3px solid black;
+    }
+    #k {
+      background-color: rgb(100,100,50,0.5);
+      border: 3px solid black;
+    }
+    #l {
+      background-color: rgb(100,100,50,0.5);
+    border: 3px solid black;
+    }
+.wrapper{
+  position: absolute;
+
+        column-gap: 20px;
+        width: 800px;
+        height: 100px;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  margin-left: -400px;
+  margin-top: -50px;
+}
+.key{
+  width: 20px;
+  color: white;
+  font-size:20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.note{
+  width: 20px;
+  color:yellow;
+  font-size:10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+  </style>
+
+  <body>
+    <div class="wrapper">
+    	<div id="a">
+        <div class="key">
+        <br>
+        A
+        </div>
+        <div class="note">
+          <br>
+          DO
+        </div>
+        </div>
+
+    	<div id="s">
+        <div class="key">
+        <br>
+        S
+        </div>
+        <div class="note">
+          <br>
+          RE
+        </div>
+      </div>
+    	<div id="d">
+        <div class="key">
+        <br>
+        D
+        </div>
+        <div class="note">
+          <br>
+          MI
+        </div>
+      </div>
+    	<div id="f">
+        <div class="key">
+        <br>
+        F
+        </div>
+        <div class="note">
+          <br>
+          FA
+        </div></div>
+    	<div id="h">
+        <div class="key">
+        <br>
+        H
+        </div>
+        <div class="note">
+          <br>
+          SOL
+        </div></div>
+    	<div id="j">
+        <div class="key">
+        <br>
+        J
+        </div>
+        <div class="note">
+          <br>
+          LA
+        </div></div>
+    	<div id="k">
+        <div class="key">
+        <br>
+        K
+        </div>
+        <div class="note">
+          <br>
+          SI
+        </div></div>
+    	<div id="l">
+        <div class="key">
+        <br>
+        L
+        </div>
+        <div class="note">
+          <br>
+          DO
+        </div></div>
+    </div>
+
+  </body>
+
+  <script>
+  var doo = new Audio('do.wav');
+    var re = new Audio('re.wav');
+      var mi = new Audio('mi.wav');
+        var fa = new Audio('fa.wav');
+          var sol = new Audio('sol.wav');
+            var la = new Audio('la.wav');
+              var si = new Audio('si.wav');
+
+  document.addEventListener("keydown", function(key){
+  if (key.key == "a" | key.key == "l") {
+    doo.play();
+  } else if (key.key =="s"){
+    re.play();
+  }else if (key.key =="d"){
+    mi.play();
+  }else if (key.key =="f"){
+    fa.play();
+  }else if (key.key =="h"){
+    sol.play();
+  }else if (key.key =="j"){
+    la.play();
+  }else if (key.key =="k"){
+    si.play();
+  }
+  document.getElementById(key.key).style.border ="3px solid yellow";
+  function change() {
+  document.getElementById(key.key).style.border ="3px solid black";
+  }
+  setTimeout(change,100);
+  });
+    </script>
+</html>
