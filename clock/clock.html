@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+  <style>
+hr {
+  border: solid;
+  width: 20%;
+  position:absolute;
+}
+
+#circle{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+ width: 200px;
+ height: 200px;
+  border: 15px solid  red;
+  border-radius: 120px;
+  margin: -100px 0 0 -100px;
+  color: red;
+}
+
+hr{
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:40%;
+}
+</style>
+
+  </head>
+
+  <body>
+  <div id="circle">
+
+
+  <hr  id="hour"  style="transform:rotate(15deg); transform-origin: left top;"> </hr>
+    <hr  id="minute" style="transform:rotate(15deg); transform-origin: left top;"> </hr>
+      <hr id="second" style="transform:rotate(15deg); transform-origin: left top;"> </hr>
+
+
+
+</div>
+  </body>
+  <script>
+  var today = new Date();
+  var hh = today.getHours();
+  var mi = today.getMinutes();
+  var ss = today.getSeconds();
+
+document.getElementById("hour").style.transform = `rotate(${270+(hh%12*30)}deg)`;
+document.getElementById("minute").style.transform = `rotate(${270+(mi*6)}deg)`;
+document.getElementById("second").style.transform = `rotate(${270+(ss*6)}deg)`;
+
+
+  setInterval(function() {
+    ss += 1;
+      document.getElementById("second").style.transform = `rotate(${270+(ss*6)}deg)`;
+    if (ss == 60) {
+      mi += 1;
+      ss = 0;
+        document.getElementById("minute").style.transform = `rotate(${270+(mi*6)}deg)`;
+      if (mi == 60) {
+        hh += 1;
+        mi = 0;
+          document.getElementById("hour").style.transform = `rotate(${270+(hh%12*30)}deg)`;
+        if (hh == 24) {
+          hh = 0;
+
+        }
+      }
+    }
+  },1000)
+
+    </script>
+</html>
