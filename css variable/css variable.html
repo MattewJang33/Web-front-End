@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+
+  <head>
+
+    <meta charset="utf-8">
+    <title></title>
+
+    <style>
+
+      :root {
+        --back-color: red;
+        --size: 50%;
+        --blur: 0px;
+      }
+
+      #background {
+        background-color: var(--back-color);
+        top: 150px;
+        left: 0;
+        height: var(--size);
+        width: var(--size);
+        display:table;
+        position: absolute;
+        filter: blur(var(--blur));
+  -webkit-filter: blur(var(--blur));
+      }
+      #middle {
+        display: table-cell;
+        vertical-align: middle;
+      }
+
+      #inner {
+    margin-left: auto;
+    margin-right:auto;
+    width: 300px;
+
+      }
+
+      #js {
+        color: var(--back-color);
+      }
+      </style>
+  </head>
+
+  <body>
+    <h1>Update CSS Variable with <span id="js" >JS</span></h1>
+    <span> Spacing </span>
+    <input type="range" oninput="myFunction(this.value)" value="50" min="50" max="100" step="1">
+    <span> Blur </span>
+        <input type="range" oninput="myFunction2(this.value)" value="0" min="0" max="10" step=".1">
+    <span> Base Color </span>
+    <input type="color" onchange="myFunction3(this.value)" value="#ff0000">
+    <div id = "background">
+      <div id="middle">
+      <div id = "inner">
+<img src="seoul.jpg"  width=100% height=100%>
+      </div>
+      </div>
+      </div>
+
+      <script>
+        function myFunction(myValue) {
+          document.documentElement.style.setProperty("--size", myValue+"%");
+        }
+
+        function myFunction2(myValue) {
+          document.documentElement.style.setProperty("--blur", myValue+"px");
+        }
+
+        function myFunction3(myValue) {
+          console.log(myValue);
+          document.documentElement.style.setProperty("--back-color", myValue);
+        }
+        </script>
+
+  </body>
+</html>
