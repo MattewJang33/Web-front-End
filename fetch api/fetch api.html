@@ -1,0 +1,143 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Type Ahead 👀</title>
+
+</head>
+<body>
+<div>
+  <form class="search-form">
+    <input type="text" class="search" placeholder="City or State" oninput="func(this.value)" >
+
+    <ul class="suggestions">
+      <li>Filter for a city <input type="checkbox" id="city_check" onclick="check_fun()" checked> </li>
+      <li>or a state <input type="checkbox" id="state_check" onclick="check_fun()" checked></li>
+    </ul>
+
+    <div id="similar">
+    </div>
+  </form>
+</div>
+<script>
+const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+
+function check_fun() {
+  var checkBox_city = document.getElementById("city_check");
+  var checkBox_state= document.getElementById("state_check");
+
+
+  if (checkBox_city.checked == true & checkBox_state.checked == true) {
+    document.querySelectorAll('.city_in').forEach(function(el) {
+      el.style.display ="list-item";
+    });
+    document.querySelectorAll('.state_in').forEach(function(el) {
+      el.style.display ="list-item";
+    });
+} else if(checkBox_city.checked == true) {
+  document.querySelectorAll('.state_in').forEach(function(el) {
+    el.style.display ="none";
+  });
+  document.querySelectorAll('.city_in').forEach(function(el) {
+      el.style.display ="list-item";
+    });
+} else if(checkBox_state.checked == true) {
+
+  document.querySelectorAll('.city_in').forEach(function(el) {
+    el.style.display ="none";
+  });
+
+  document.querySelectorAll('.state_in').forEach(function(el) {
+    el.style.display ="list-item";
+  });
+} else{
+  document.querySelectorAll('.city_in').forEach(function(el) {
+    el.style.display ="none";
+  });
+  document.querySelectorAll('.state_in').forEach(function(el) {
+      el.style.display ="none";
+    });
+  }
+
+}
+
+
+
+
+
+
+
+function makeUL(array) {
+    // Create the list element:
+    var list = document.createElement('ul');
+
+    for (var i = 0; i < array.length; i++) {
+        // Create the list item:
+        var item = document.createElement('li');
+
+        // Set its contents:
+        item.appendChild(document.createTextNode(`${array[i].city}, ${array[i].state}` ));
+        if (array[i].city_in == 1) {
+        item.classList.add("city_in")
+          item.style.display = "list-item"
+      }
+      if (array[i].state_in == 1) {
+      item.classList.add("state_in")
+      item.style.display = "list-item"
+    }
+        // Add it to the list:
+        list.appendChild(item);
+    }
+
+    // Finally, return the constructed list:
+    return list;
+}
+
+function func(e) {
+
+ var typed = e.toLowerCase();
+
+
+fetch(endpoint)
+  .then(function(response) {
+      if (response.status !== 200) {
+        console.log('Looks like there was a problem. Status Code: ' +  response.status);
+        return;
+      }
+      // Examine the text in the response
+        response.json().then(function(data) {
+        filtered = data.filter(function (str) {
+          str['city_in'] = 0;
+          str['state_in'] = 0;
+          if (typed != "") {
+            if (str.city.toLowerCase().indexOf(typed) != -1) {
+              str['city_in'] = 1;
+            }
+            if (str.state.toLowerCase().indexOf(typed) != -1){
+              str['state_in'] = 1;
+            }
+
+          }
+          return (typed !="" & (str.city.toLowerCase().indexOf(typed) != -1 || str.state.toLowerCase().indexOf(typed) != -1));});
+        document.getElementById('similar').innerHTML = "";
+        document.getElementById('similar').appendChild(makeUL(filtered));
+        
+      });
+
+    } )
+
+  .catch(function(err) {
+    console.log('Fetch Error :-S', err);
+  });
+
+}
+
+</script>
+<style>
+span{
+  color: yellow;
+}
+</style>
+</body>
+</html>
