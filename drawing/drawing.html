@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5 Canvas</title>
+</head>
+
+<body>
+<canvas id="draw" width="800" height="800"></canvas>
+<script type="text/javascript">
+  var d = document.getElementById('draw');
+    d.addEventListener('mousedown', function(e){
+     ctx = d.getContext("2d");
+     var flag = true;
+      ctx.beginPath();
+      ctx.lineWidth = "10"
+      ctx.strokeStyle = "green";
+      ctx.moveTo(e.clientX,e.clientY);
+
+      d.addEventListener('mousemove',  function(e){
+        if (flag==true){
+        ctx.lineTo(e.clientX,e.clientY);
+        ctx.stroke();
+      }
+        d.addEventListener('mouseup',  function(e){
+      flag = false;
+        });
+
+      });
+
+
+    });
+
+
+
+</script>
+
+<style>
+  html, body {
+    margin: 0;
+  }
+</style>
+
+</body>
+</html>
