@@ -57,20 +57,21 @@
         if (callNow) func.apply(context, args);
       };
     }
+    function scroll(e) {
+    document.querySelectorAll('img').forEach(e =>
+      {
+    if((e.getBoundingClientRect().top < window.innerHeight)&& ((e.getBoundingClientRect().top+e.getBoundingClientRect().bottom)/2 > 0)){
 
+      e.classList.add("active");
+    }
+    else{
+    e.classList.remove("active");
+    }
+    })
+    }
 
-document.addEventListener("scroll", e => {
-document.querySelectorAll('img').forEach(e =>
-  {
-if(window.scrollY+e.getBoundingClientRect().top < window.scrollY+window.innerHeight & window.scrollY+e.getBoundingClientRect().top > window.scrollY){
-
-  e.classList.add("active");
-}
-else{
-  debounce(e.classList.remove("active"))
-}
-})
-})
+var debouncescroll = debounce(scroll,20);
+document.addEventListener("scroll", debouncescroll)
 
 
   </script>
