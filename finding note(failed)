@@ -1,6 +1,0 @@
-import matplotlib
-import scipy.io.wavfile as wavfile
-rate, data = wavfile.read('rec.wav')
-time = np.arange(len(data[:,0]))
-plt.plot(time,data[:,0])
-plt.show()
